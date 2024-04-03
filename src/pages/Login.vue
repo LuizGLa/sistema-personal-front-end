@@ -1,72 +1,56 @@
 <template>
-  <main class="row">
-    <div class="col-xs-12 col-md-6">
-      <div class="row text-center q-mt-xl">
-        <div class="col-12">
-          <img class="pmvc-logo" src="../assets/images/logo-pmvc.svg" alt />
-        </div>
-        <div class="col-12">
-          <h1 class="text-bold text-blue-9  text-h4 q-mt-md q-mb-lg">
-            <!-- <q-icon name="defina um icone aqui"/> -->
-            {{ app_name }}
-          </h1>
-        </div>
-      </div>
-      <div class="row justify-center">
-        <q-form
-          ref="form"
-          @submit.prevent.stop="onSubmit"
-        >
-          <div class="row form-container">
-            <div class="col-12 q-mb-md">
-              <label class="label text-font">Usuário</label>
-              <q-input
-                filled
-                ref="username"
-                outlined
-                name="usuario"
-                type="text"
-                v-model="data.username"
-                lazy-rules
-                :rules="usernameRules"
-              />
-            </div>
-            <div class="col-12 q-mb-md">
-              <label class="label text-font">Senha</label>
-              <q-input
-                filled
-                ref="password"
-                outlined
-                name="password"
-                type="password"
-                v-model="data.password"
-                :rules="passwordRules"
-              />
-            </div>
-            <div class="col-12">
-              <q-btn
-                class="text-font full-width"
-                type="submit"
-                color="primary"
-                label="Entrar"
-              />
-            </div>
-          </div>
-        </q-form>
-      </div>
-      <div class="cti-logo-container">
-        <img class="cti-logo" src="../assets/images/cti-logo2.png" alt="cti logo">
-      </div>
+  <q-layout class="page">
+    <q-page-container>
+      <q-page class="flex flex-center">
+            <q-card class="q-pa-xl card">
+              <q-card-section>
+                <q-img
+                  src="../assets/images/logo.png"
+                  style="width: 30em"
+                />
+              </q-card-section>
+              <q-card-section>
+                <q-form
+                  ref="form"
+                  @submit.prevent.stop="onSubmit"
+                >
+                  <q-input
+                    filled
+                    dense
+                    ref="username"
+                    outlined
+                    name="usuario"
+                    type="text"
+                    v-model="data.username"
+                    lazy-rules
+                    :rules="usernameRules"
+                    label="Usuário"
+                  />
+                  <q-input
+                    filled
+                    dense
+                    ref="password"
+                    outlined
+                    name="password"
+                    type="password"
+                    v-model="data.password"
+                    :rules="passwordRules"
+                    label="Senha"
+                  />
+                  <q-btn
+                    class="full-width"
+                    type="submit"
+                    text-color="white"
+                    label="Entrar"
+                    style="background-color: #2879c4"
+                  />
+                </q-form>
+              </q-card-section>
+            </q-card>
+      </q-page>
+    </q-page-container>
+  </q-layout>
 
-    </div>
-    <div class="aside col-xs-0 col-md-6 column justify-end">
-      <img
-        src="../assets/images/logo_CTI.png"
-        alt="logo do cti"
-        style="width: 500px; margin: 10px auto"
-      />
-    </div>
-  </main>
 </template>
 
 <script>
@@ -146,13 +130,17 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.page {
+  background: linear-gradient(175deg, #0897b7 0%, #e7f7ff 100%);
+
+}
+
+.card {
+ background-color: rgba(255, 255, 255, 0.853);
+ border-radius: 30px;
+
+}
 .aside {
-  background: linear-gradient(
-      to bottom,
-      rgba(50, 113, 166, 0.85),
-      rgba(183, 215, 86, 0.85)
-    ),
-    url(../assets/images/imagem-de-fundo.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
