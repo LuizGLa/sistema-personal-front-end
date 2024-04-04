@@ -138,6 +138,9 @@ export default defineComponent({
       rgba(4, 28, 51, 0.85)),
     url(../assets/images/backgroundFit.jpg);
 
+  background-repeat: no-repeat;
+  background-size: cover;
+
 
 
 }

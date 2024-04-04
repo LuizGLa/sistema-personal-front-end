@@ -1,33 +1,33 @@
 <template>
+  <div class="header_container">
+    <q-btn v-if="rota_adicionar && botao" :to="rota_adicionar" >
+      <q-icon name="add" />
+      <span v-if="$q.screen.width >= 750">{{ botao }}</span>
+    </q-btn>
+
+    <q-input
+      class="search_bar"
+      dense
+      debounce="500"
+      v-model="filter"
+      @blur="buscaDados"
+      placeholder="Pesquisar"
+    >
+      <template v-slot:append>
+        <q-icon name="search" />
+      </template>
+    </q-input>
+  </div>
   <q-table
+  class="my-sticky-dynamic"
     :title="titulo"
     :rows="dados"
     :columns="colunas"
     row-key="name"
-    flat
+    flat bordered
+    separator="cell"
     v-model:pagination="paginacao_inicial"
   >
-    <template v-slot:top>
-      <div class="header_container">
-        <q-btn v-if="rota_adicionar && botao" :to="rota_adicionar" color="primary">
-          <q-icon name="add" />
-          <span v-if="$q.screen.width >= 750">{{ botao }}</span>
-        </q-btn>
-
-        <q-input
-          class="search_bar"
-          dense
-          debounce="500"
-          v-model="filter"
-          @blur="buscaDados"
-          placeholder="Pesquisar"
-        >
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </div>
-    </template>
     <template v-if="acoes" v-slot:body-cell-acoes="props">
       <q-td class="actions_container">
         <q-btn
@@ -60,10 +60,35 @@
   </q-table>
 </template>
 
+<style lang="sass">
+.my-sticky-dynamic
+  /* height or max-height is important */
+
+  .q-table__top,
+  .q-table__bottom,
+  thead tr:first-child th /* bg color is important for th; just specify one */
+    background-color: rgba(6, 116, 133, 0.85)
+    color: white
+
+  thead tr th
+    position: sticky
+    z-index: 1
+  /* this will be the loading indicator */
+  thead tr:last-child th
+    /* height of all previous header rows */
+    top: 48px
+  thead tr:first-child th
+    top: 0
+
+  /* prevent scrolling behind sticky top row on focus */
+  tbody
+    /* height of all previous header rows */
+    scroll-margin-top: 48px
+</style>
+
 <style scoped>
 .header_container {
   width: 100%;
-
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -77,7 +102,6 @@
 .pagination_container {
   width: 100%;
   padding: 1rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -90,6 +114,7 @@
   justify-content: center;
   gap: 0.5rem;
 }
+
 </style>
 
 <script setup>
@@ -97,6 +122,7 @@ import { useQuasar } from 'quasar';
 import { api } from 'src/boot/axios';
 import { defineProps, ref, watch, onMounted, nextTick } from 'vue';
 import exibiNotificacao from 'src/assets/js/notificacao';
+
 const props = defineProps({
   colunas: Array,
   rota: String,
@@ -112,6 +138,7 @@ const props = defineProps({
     default: undefined,
   },
 });
+
 const filter = ref('');
 const $q = useQuasar();
 const dados = ref([]);
@@ -152,6 +179,7 @@ async function buscaDados() {
 
   return;
 }
+
 onMounted(() => {
   buscaDados();
 });
