@@ -2,14 +2,14 @@
   <q-layout class="page">
     <q-page-container>
       <q-page class="flex flex-center">
-            <q-card class="q-pa-xl card">
+            <q-card class="card">
               <q-card-section>
                 <q-img
+                  class="img-logo q-mt-xl q-mx-xl"
                   src="../assets/images/logo.png"
-                  style="width: 30em"
                 />
               </q-card-section>
-              <q-card-section>
+              <q-card-section class="inputs q-ma-xl">
                 <q-form
                   ref="form"
                   @submit.prevent.stop="onSubmit"
@@ -18,6 +18,7 @@
                     filled
                     dense
                     ref="username"
+                    label-color="teal-9"
                     outlined
                     name="usuario"
                     type="text"
@@ -32,6 +33,7 @@
                     ref="password"
                     outlined
                     name="password"
+                    label-color="teal-9"
                     type="password"
                     v-model="data.password"
                     :rules="passwordRules"
@@ -42,7 +44,7 @@
                     type="submit"
                     text-color="white"
                     label="Entrar"
-                    style="background-color: #2879c4"
+                    style="background-color: rgb(6, 116, 133)"
                   />
                 </q-form>
               </q-card-section>
@@ -131,13 +133,20 @@ export default defineComponent({
 
 <style scoped>
 .page {
-  background: linear-gradient(175deg, #0897b7 0%, #e7f7ff 100%);
+  background: linear-gradient(to bottom,
+      rgba(6, 116, 133, 0.85),
+      rgba(4, 28, 51, 0.85)),
+    url(../assets/images/backgroundFit.jpg);
+
+
 
 }
 
 .card {
- background-color: rgba(255, 255, 255, 0.853);
+ backdrop-filter: blur(10px);
+ background-color: #e7e9ee;
  border-radius: 30px;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
 }
 .aside {
@@ -159,36 +168,27 @@ export default defineComponent({
   font-family: "Gothic A1", sans-serif;
 }
 
-.pmvc-logo{
-  height: 130px;
-  object-fit: cover;
+.img-logo{
+  width: 27em;
 }
-.cti-logo-container {
-  justify-content: center;
-  align-items: center;
-  margin-top: 15px;
-  width: 100%;
-  height: 130px;
-  display: none;
+@media (max-width: 690px) {
+.img-logo{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  width: 15em;
+  }
+
+.card {
+ backdrop-filter: blur(10px);
+ background-color: #e7e9ee;
+ border-radius: 30px;
+ box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
-.cti-logo{
-  height: 90px;
-  object-fit: cover;
+.inputs {
+  margin: 10px;
 }
-@media (max-width : 1024px) {
-  .aside {
-    display: none;
-  }
-  .cti-logo-container {
-    display: flex;
-  }
-  .pmvc-logo{
-    height: 100px;
-  }
-}
-@media (max-height : 640px) {
-  .cti-logo-container {
-    display: none;
-  }
 }
 </style>

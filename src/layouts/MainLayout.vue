@@ -1,8 +1,8 @@
 <template>
   <q-layout view="hHh Lpr lff">
     <q-header>
-      <q-toolbar class="row bg-blue-10">
-        <div class="col-6 col-sm-4 col-md-2">
+      <q-toolbar class="row bg-cyan-9">
+        <div class="col-lg-4 col-sm-4 col-md-2">
           <q-btn
             flat
             dense
@@ -13,26 +13,15 @@
           />
         </div>
 
-        <div class="xs-hide col-sm-4 col-md-5 col-lg-6">
-          <q-toolbar-title style="line-height: normal">
-            <q-icon size="25px" name="feed" class="q-mr-xs" />
-            Modelo Front-end
+        <div class="xs-hide col-sm-4 col-md-8 col-lg-4">
+          <q-toolbar-title class="flex flex-center" style="line-height: normal">
+            <img src="../assets/images/logoAdmin.png" alt="Logo" class="logo" style="height: 70px; margin: 7px;" />
           </q-toolbar-title>
         </div>
-
-        <div
-          class="xs-hide sm-hide col-md-3 col-lg-2"
-          style="text-align: right"
-        >
-          <p>
-            Olá <strong>{{ userName }}</strong
-            >, seja bem vindo!
-          </p>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2 col-lg-2" style="text-align: right">
+        <div class="col-6 col-sm-4 col-md-2 col-lg-4" style="text-align: right">
           <q-btn
             color="white"
-            class="text-blue-9"
+            class="text-cyan-9"
             :label="acesso"
             icon="account_circle"
           >
