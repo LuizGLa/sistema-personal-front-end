@@ -1,15 +1,7 @@
 <template>
   <q-page>
-    <cti-card icone="people" titulo="Usuários do Sistema">
-      <cti-tabela
-        title="Lista de usuários"
-        :colunas="colunas"
-        rota="usuarios"
-        rota_adicionar="/usuarios/adicionar"
-        botao="Adicionar Usuário"
-        :acoes="acoes"
-        :itensPorPagina="10"
-      />
+    <cti-card icone="people" titulo="Exercícios">
+
     </cti-card>
   </q-page>
 </template>
@@ -19,7 +11,6 @@ import exibeMensagem from "src/assets/js/mensagem";
 import exibiNotificacao from "src/assets/js/notificacao";
 import { api } from "src/boot/axios";
 import CtiCard from "src/components/commons/CtiCard.vue";
-import CtiTabela from "src/components/tables/CtiTabela.vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 

@@ -121,7 +121,7 @@ export default {
           },
           {
             title: 'Exercícios',
-            icon: 'assignment',
+            icon: 'fitness_center',
             link: '/exercicios',
           },
           {

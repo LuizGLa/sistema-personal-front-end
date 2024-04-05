@@ -56,6 +56,18 @@ const routes = [
             path: '/alunos/editar/:id',
             component: () => module.require('src/pages/Admin/alunos/EditarAluno.vue'),
           },
+          {
+            path: '/exercicios',
+            component: () => module.require('src/pages/Admin/exercicios/Exercicios.vue'),
+          },
+          {
+            path: '/exercicios/adicionar',
+            component: () => module.require('src/pages/Admin/exercicios/AdicionarExercicio.vue'),
+          },
+          {
+            path: '/exercicios/editar/:id',
+            component: () => module.require('src/pages/Admin/exercicios/EditarExercicio.vue'),
+          },
         ],
       },
     ],
