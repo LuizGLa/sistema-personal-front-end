@@ -134,8 +134,8 @@ export default defineComponent({
 <style scoped>
 .page {
   background: linear-gradient(to bottom,
-      rgba(6, 116, 133, 0.85),
-      rgba(4, 28, 51, 0.85)),
+      rgba(6, 131, 125, 0.85),
+      rgba(9, 65, 115, 0.85)),
     url(../assets/images/backgroundFit.jpg);
 
   background-repeat: no-repeat;

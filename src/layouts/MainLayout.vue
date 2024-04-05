@@ -120,6 +120,11 @@ export default {
             link: `/a/`,
           },
           {
+            title: 'Exercícios',
+            icon: 'assignment',
+            link: '/exercicios',
+          },
+          {
             title: 'Alunos',
             icon: 'groups',
             link: '/alunos',
