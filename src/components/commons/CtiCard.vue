@@ -1,7 +1,7 @@
 <template>
   <q-card :style="`min-height: ${$q.screen.height - 120}px`">
     <q-card-section class="row bg-grey-2 q-py-sm flex justify-between sec-header">
-      <div class="flex">
+      <div class="flex group">
         <q-icon size="md" :name="icone" />
         <div class="text-h6 q-ml-sm">{{ titulo }}</div>
       </div>
@@ -24,4 +24,8 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.group {
+}
+</style>
 

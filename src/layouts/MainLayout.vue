@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh Lpr lff">
     <q-header>
-      <q-toolbar class="row bg-cyan-9">
+      <q-toolbar class="row" style="background-color: #003C43;\">
         <div class="col-lg-4 col-sm-4 col-md-2">
           <q-btn
             flat
@@ -56,11 +56,12 @@
       <div>
         <q-drawer
           behavior="desktop"
+          :width="190"
           v-model="leftDrawerOpen"
           :overlay="!modoExibicao"
           show-if-above
+          class="q-py-md bg-grey-2"
           bordered
-          class="bg-blue-1 10 q-py-md"
         >
           <q-list>
             <EssentialLink
@@ -74,8 +75,8 @@
       <router-view class="q-pa-md" />
     </q-page-container>
 
-    <q-footer elevated class="bg-grey-10 q-pa-xs text-white text-center">
-      <span>Desenvolvido por CTI</span>
+    <q-footer style="background-color: #003C43;" elevated class=" q-pa-xs text-white text-center">
+      <span>LCode © 2024</span>
     </q-footer>
   </q-layout>
 </template>
@@ -178,3 +179,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.selected-link {
+  background-color: #5cb85c; /* Altere para a cor desejada */
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <q-page>
-    <cti-card icone="people" titulo="Alunos do Sistema">
+    <cti-card icone="people" titulo="Alunos">
       <cti-tabela
         title="Lista de alunos"
         :colunas="colunas"
@@ -65,7 +65,7 @@ const colunas = ref([
     name: "situacao",
     align: "center",
     label: "Situação",
-    field: "situacao",
+    field: row => row.situacao.charAt(0).toUpperCase() + row.situacao.slice(1),
     sortable: true,
   },
   {

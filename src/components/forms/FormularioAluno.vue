@@ -12,7 +12,6 @@
             hint="Informe o nome completo sem
           abreviações"
             clearable
-            clear-icon="close"
             :rules="nameRules"
           />
         </div>
@@ -25,7 +24,6 @@
             label="Email"
             hint="Informe o email"
             clearable
-            clear-icon="close"
             :rules="emailRules"
           />
         </div>
@@ -36,11 +34,9 @@
             mask="##"
             v-model="form.idade"
             lazy-rules
-            type="number"
             label="Idade"
             hint="Informe o idade"
             clearable
-            clear-icon="close"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 q-mb-lg">
@@ -53,8 +49,8 @@
             label="Peso"
             hint="Informe o peso"
             clearable
-            clear-icon="close"
-          />
+          >
+        </q-input>
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 q-mb-lg">
           <q-input
@@ -66,7 +62,6 @@
             label="Altura"
             hint="Informe a altura"
             clearable
-            clear-icon="close"
           />
         </div>
         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 q-mb-lg">
@@ -80,7 +75,6 @@
             label="Situação"
             hint="Informe a situação"
             clearable
-            clear-icon="close"
             :rules="campoVazioRules"
           />
         </div>
@@ -95,7 +89,6 @@
             label="Login"
             hint="Informe o nome para login"
             clearable
-            clear-icon="close"
             :rules="loginRules"
           />
         </div>
@@ -108,7 +101,6 @@
             lazy-rules
             label="Senha"
             hint="Informe uma senha"
-            clear-icon="close"
             :rules="senhaRules"
           />
         </div>
@@ -121,7 +113,6 @@
             label="Confirmação da senha"
             hint="Informe novamente a senha"
             type="password"
-            clear-icon="close"
             :rules="confirmarSenhaRules"
           />
         </div>

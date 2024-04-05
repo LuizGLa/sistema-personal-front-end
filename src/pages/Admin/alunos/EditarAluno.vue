@@ -33,6 +33,9 @@ async function editarDados(dados) {
   });
   try {
     const data = { ...dados };
+    data.idade = parseInt(data.idade);
+    data.peso = parseFloat(data.peso);
+    data.altura = parseFloat(data.altura);
 
     if (data.senha === '') {
       delete data.senha;

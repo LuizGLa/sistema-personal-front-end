@@ -1,6 +1,6 @@
 <template>
   <div class="q-mb-xs header_container justify-between">
-    <q-btn style="color: aliceblue; background-color: rgba(6, 116, 133, 0.85);" icon="add_circle" v-if="rota_adicionar && botao" :to="rota_adicionar" >
+    <q-btn style="color: aliceblue; background-color: #003C43" icon="add_circle" v-if="rota_adicionar && botao" :to="rota_adicionar" >
       <span class="q-ml-xs" v-if="$q.screen.width >= 750">{{ botao }}</span>
     </q-btn>
     <div>
@@ -45,6 +45,16 @@
         </q-btn>
       </q-td>
     </template>
+    <template v-slot:body-cell-situacao="props">
+      <q-td :props="props">
+        <div>
+          <q-badge :color="mudarCor(props.value)" :label="props.value" />
+        </div>
+        <div>
+          {{ props.row.details }}
+        </div>
+      </q-td>
+    </template>
     <template v-slot:bottom>
       <div class="pagination_container">
         <q-pagination
@@ -70,7 +80,7 @@
   .q-table__top,
   .q-table__bottom,
   thead tr:first-child th /* bg color is important for th; just specify one */
-    background-color: rgba(6, 116, 133, 0.85)
+    background-color: #135D66
     color: white
 
   thead tr th
@@ -152,6 +162,8 @@ const paginacao_inicial = ref({
   rowsPerPage: props.itensPorPagina,
 });
 
+
+
 const pagination = ref({
   rowsPerPage,
   maxPages: 0,
@@ -182,6 +194,24 @@ async function buscaDados() {
 
   return;
 }
+
+function mudarCor(situacao) {
+  switch (situacao) {
+    case 'Disponível':
+      return 'green-9';
+      case 'Indisponível':
+      return 'red-9';
+    case 'Ativo':
+      return 'green-9';
+    case 'Inativo':
+      return'red-9';
+    case 'Atribuido':
+      return 'blue-10';
+    default:
+      return 'grey';
+  }
+}
+
 
 onMounted(() => {
   buscaDados();
