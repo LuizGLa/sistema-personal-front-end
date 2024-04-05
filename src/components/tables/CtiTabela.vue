@@ -1,22 +1,24 @@
 <template>
-  <div class="header_container">
-    <q-btn v-if="rota_adicionar && botao" :to="rota_adicionar" >
-      <q-icon name="add" />
-      <span v-if="$q.screen.width >= 750">{{ botao }}</span>
+  <div class="q-mb-xs header_container justify-between">
+    <q-btn style="color: aliceblue; background-color: rgba(6, 116, 133, 0.85);" icon="add_circle" v-if="rota_adicionar && botao" :to="rota_adicionar" >
+      <span class="q-ml-xs" v-if="$q.screen.width >= 750">{{ botao }}</span>
     </q-btn>
-
-    <q-input
-      class="search_bar"
-      dense
-      debounce="500"
-      v-model="filter"
-      @blur="buscaDados"
-      placeholder="Pesquisar"
-    >
-      <template v-slot:append>
-        <q-icon name="search" />
-      </template>
-    </q-input>
+    <div>
+     <q-input
+        class="search_bar"
+        dense
+        label-color="teal-9"
+        debounce="500"
+        outlined
+        v-model="filter"
+        @blur="buscaDados"
+        placeholder="Pesquisar"
+      >
+        <template v-slot:append>
+          <q-icon name="search" color="teal-9" />
+        </template>
+      </q-input>
+    </div>
   </div>
   <q-table
   class="my-sticky-dynamic"
@@ -32,6 +34,7 @@
       <q-td class="actions_container">
         <q-btn
           dense
+          size="sm"
           unelevated
           v-for="acao in acoes"
           :key="acao.nome"

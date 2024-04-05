@@ -119,20 +119,24 @@ export default {
             link: `/a/`,
           },
           {
-            title: 'Perfil',
-            icon: 'account_circle',
-            link: `/perfil`,
+            title: 'Alunos',
+            icon: 'groups',
+            link: '/alunos',
           },
           {
             title: 'Usuários',
             icon: 'group',
             link: '/usuarios',
           },
+          {
+            title: 'Perfil',
+            icon: 'account_circle',
+            link: `/perfil`,
+          },
         );
 
         acesso.value = 'admin';
       } else {
-        // ITENS DE NAVEGAÇÃO USUARIO
 
         links.value.push(
           {

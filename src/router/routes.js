@@ -34,29 +34,27 @@ const routes = [
           },
           {
             path: '/usuarios',
-            component: () => module.require('src/pages/Admin/Usuarios.vue'),
+            component: () => module.require('src/pages/Admin/usuarios/Usuarios.vue'),
           },
           {
             path: '/usuarios/adicionar',
-            component: () => module.require('src/pages/Admin/AdicionarUsuario.vue'),
+            component: () => module.require('src/pages/Admin/usuarios/AdicionarUsuario.vue'),
           },
           {
             path: '/usuarios/editar/:id',
-            component: () => module.require('src/pages/commons/EditarUsuario.vue'),
-          },
-        ],
-      },
-      {
-        path: '/u/',
-        meta: { requiredLogin: true },
-        children: [
-          {
-            path: '',
-            component: () => module.require('src/pages/Usuario/Home.vue'),
+            component: () => module.require('src/pages/Admin/usuarios/EditarUsuario.vue'),
           },
           {
-            path: '/editar/:id',
-            component: () => module.require('src/pages/commons/EditarUsuario.vue'),
+            path: '/alunos',
+            component: () => module.require('src/pages/Admin/alunos/Alunos.vue'),
+          },
+          {
+            path: '/alunos/adicionar',
+            component: () => module.require('src/pages/Admin/alunos/AdicionarAluno.vue'),
+          },
+          {
+            path: '/alunos/editar/:id',
+            component: () => module.require('src/pages/Admin/alunos/EditarAluno.vue'),
           },
         ],
       },
