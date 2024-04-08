@@ -4,7 +4,7 @@
       <div class="col-lg-3 col-sm-3 col-xs-4">
         <img class="imagem" :src="props.imgLink">
       </div>
-      <div class="col-xl-8 col-lg-7 col-sm-7 col-xs-5 row flex justify-center">
+      <div class="col-xl-7 col-lg-7 col-sm-7 col-xs-5 row flex justify-center">
         <div class="col-12 text-center">
           <q-card-section class="text-white" style="border-bottom: 1px solid #d3d2d2; background-color: #003C43;">
             <div class="title responsive-text">
@@ -25,7 +25,8 @@
           </q-card-section>
         </q-card>
       </q-dialog>
-      <q-card-actions vertical class="justify-around bg-grey-2 actions col-xs-3 col-md-2 col-lg-2 col-sm-2 col-xl-1">
+      <q-card-actions vertical
+        class="justify-around bg-grey-2 actions col-xs-3 col-md-2 col-lg-2 col-xl-2 col-sm-2 col-xl-1">
         <q-btn class="mobile-only" flat unelevated dense color="blue-9" @click="showDialog = true">
           <q-icon name="info" />
         </q-btn>
@@ -74,7 +75,7 @@ watch(windowWidth, (newWidth) => {
 const truncateDescription = (description) => {
   let limit;
   if (windowWidth.value > 1200) {
-    limit = 200;
+    limit = 110;
   } else if (windowWidth.value > 800) {
     limit = 150;
   } else {
@@ -88,7 +89,7 @@ const truncateDescription = (description) => {
 .imagem {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-right: 1px solid #d3d2d2;
 }
 
