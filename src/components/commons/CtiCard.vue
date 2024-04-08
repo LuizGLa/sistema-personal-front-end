@@ -2,10 +2,10 @@
   <q-card :style="`min-height: ${$q.screen.height - 120}px`">
     <q-card-section class="row bg-grey-2 q-py-sm flex justify-between sec-header">
       <div class="flex group">
-        <q-icon size="md" :name="icone" />
-        <div class="text-h6 q-ml-sm">{{ titulo }}</div>
+        <q-icon size="md" class="text-teal-9" :name="icone" />
+        <div class="text-h6 text-teal-9 q-ml-sm">{{ titulo }}</div>
       </div>
-      <slot name="button"/>
+      <slot name="button" />
     </q-card-section>
 
     <q-separator />
@@ -24,8 +24,4 @@ export default defineComponent({
   },
 });
 </script>
-<style scoped>
-.group {
-}
-</style>
-
+<style scoped></style>

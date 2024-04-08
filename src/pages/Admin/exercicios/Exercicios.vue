@@ -1,10 +1,16 @@
 <template>
   <q-page>
     <cti-card icone="people" titulo="Exercícios">
-
+      <div class="row">
+        <template v-for="(exercicio, index) in exercicios" :key="index">
+          <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :img-link="exercicio.gifUrl" :nome="exercicio.nome"
+            :descricao="exercicio.descricao" />
+        </template>
+      </div>
     </cti-card>
   </q-page>
 </template>
+
 
 <script setup>
 import { useQuasar } from "quasar";
@@ -14,6 +20,7 @@ import { api } from "src/boot/axios";
 import CtiCard from "src/components/commons/CtiCard.vue";
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import ExercicioCard from "src/components/commons/ExercicioCard.vue";
 
 const max_paginas = ref(0);
 const $q = useQuasar();
@@ -44,7 +51,6 @@ async function buscaDados() {
   const pagina = pagination.value.page;
 
   const url = `exercicios/?pagina=${pagina}&itensPorPagina=10&busca=${filter.value}`;
-  exercicios.value = [];
 
   try {
     const { data } = await api.get(url);
@@ -57,9 +63,8 @@ async function buscaDados() {
     $q.loading.hide();
     exibiNotificacao('negative', erro.message, 'top');
   }
-
-  return;
 }
+
 
 onMounted(async () => {
   await buscaDados();

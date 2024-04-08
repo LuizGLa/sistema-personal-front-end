@@ -1,46 +1,24 @@
 <template>
   <div class="q-mb-xs header_container justify-between">
-    <q-btn style="color: aliceblue; background-color: #003C43" icon="add_circle" v-if="rota_adicionar && botao" :to="rota_adicionar" >
+    <q-btn style="color: aliceblue; background-color: #003C43" icon="add_circle" v-if="rota_adicionar && botao"
+      :to="rota_adicionar">
       <span class="q-ml-xs" v-if="$q.screen.width >= 750">{{ botao }}</span>
     </q-btn>
     <div>
-     <q-input
-        class="search_bar"
-        dense
-        label-color="teal-9"
-        debounce="500"
-        outlined
-        v-model="filter"
-        @blur="buscaDados"
-        placeholder="Pesquisar"
-      >
+      <q-input class="search_bar" dense label-color="teal-9" debounce="500" outlined v-model="filter" @blur="buscaDados"
+        placeholder="Pesquisar">
         <template v-slot:append>
           <q-icon name="search" color="teal-9" />
         </template>
       </q-input>
     </div>
   </div>
-  <q-table
-  class="my-sticky-dynamic"
-    :title="titulo"
-    :rows="dados"
-    :columns="colunas"
-    row-key="name"
-    flat bordered
-    separator="cell"
-    v-model:pagination="paginacao_inicial"
-  >
+  <q-table class="my-sticky-dynamic" :title="titulo" :rows="dados" :columns="colunas" row-key="name" flat bordered
+    separator="cell" v-model:pagination="paginacao_inicial">
     <template v-if="acoes" v-slot:body-cell-acoes="props">
       <q-td class="actions_container">
-        <q-btn
-          dense
-          size="sm"
-          unelevated
-          v-for="acao in acoes"
-          :key="acao.nome"
-          :color="acao.cor"
-          @click="acao.click(props.row)"
-        >
+        <q-btn dense size="sm" unelevated v-for="acao in acoes" :key="acao.nome" :color="acao.cor"
+          @click="acao.click(props.row)">
           <q-icon :name="acao.icone" />
         </q-btn>
       </q-td>
@@ -57,17 +35,8 @@
     </template>
     <template v-slot:bottom>
       <div class="pagination_container">
-        <q-pagination
-          v-if="max_paginas > 1"
-          @input="console.log(pagination.page)"
-          v-model="pagination.page"
-          color="grey"
-          active-color="primary"
-          :max="max_paginas"
-          :max-pages="max_paginas"
-          direction-links
-          size="md"
-        />
+        <q-pagination v-if="max_paginas > 1" @input="console.log(pagination.page)" v-model="pagination.page"
+          color="grey" active-color="primary" :max="max_paginas" :max-pages="max_paginas" direction-links size="md" />
       </div>
     </template>
   </q-table>
@@ -127,7 +96,6 @@
   justify-content: center;
   gap: 0.5rem;
 }
-
 </style>
 
 <script setup>
@@ -199,12 +167,12 @@ function mudarCor(situacao) {
   switch (situacao) {
     case 'Disponível':
       return 'green-9';
-      case 'Indisponível':
+    case 'Indisponível':
       return 'red-9';
     case 'Ativo':
       return 'green-9';
     case 'Inativo':
-      return'red-9';
+      return 'red-9';
     case 'Atribuido':
       return 'blue-10';
     default:
