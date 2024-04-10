@@ -3,8 +3,9 @@
     <cti-card icone="people" titulo="Exercícios">
       <div class="row">
         <template v-for="(exercicio, index) in exercicios" :key="index">
-          <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :img-link="exercicio.gifUrl" :nome="exercicio.nome"
-            :descricao="exercicio.descricao" />
+          <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :exercicioId="exercicio.id"
+            :img-link="exercicio.gifUrl" :nome="exercicio.nome" :descricao="exercicio.descricao"
+            @delete="deleteExercicio(exercicio.id)" />
         </template>
       </div>
     </cti-card>
@@ -71,11 +72,10 @@ onMounted(async () => {
 });
 
 
-async function deleta(usuario) {
-  try {
-    const { status } = await api.delete(`usuarios/${usuario.id}`);
-    const recarregar = () => location.reload()
 
+const deleteExercicio = async (exercicioId) => {
+  try {
+    const { status } = await api.delete(`exercicios/${exercicioId}`);
     if (status == 200) {
       exibiNotificacao(
         "positive",
@@ -83,36 +83,12 @@ async function deleta(usuario) {
         "top",
         3000,
       );
-      setTimeout(recarregar, 1000)
+      await buscaDados(); // Atualiza os dados após a exclusão
     }
   } catch (error) {
     exibiNotificacao("negative", error.response.data.message, "top", 3000);
   }
 }
 
-const acoes = ref([
-  {
-    nome: "Editar",
-    cor: "warning",
-    icone: "edit",
-    click(row) {
-      router.push("/usuarios/editar/" + row.id);
-    },
-  },
-  {
-    nome: "Deletar",
-    cor: "negative",
-    icone: "delete",
-    click(row) {
-      const mensagem = `Tem certeza que deseja excluir ${row.nome}?`;
-      const acao = () => deleta(row);
-      const botao = "Sim, excluir";
-      exibeMensagem({
-        mensagem,
-        acao,
-        botao,
-      });
-    },
-  },
-]);
+
 </script>

@@ -33,7 +33,7 @@
         <q-btn flat unelevated dense color="orange-9">
           <q-icon name="edit" />
         </q-btn>
-        <q-btn flat unelevated dense color="red-9">
+        <q-btn flat unelevated dense color="red-9" @click="handleDelete">
           <q-icon name="delete" />
         </q-btn>
       </q-card-actions>
@@ -61,7 +61,15 @@ const props = defineProps({
 
 const windowWidth = ref(window.innerWidth);
 const showDialog = ref(false);
+const emit = defineEmits([
+  "delete",
 
+]);
+
+
+const handleDelete = () => {
+  emit('delete');
+};
 onMounted(() => {
   window.addEventListener('resize', () => {
     windowWidth.value = window.innerWidth;
