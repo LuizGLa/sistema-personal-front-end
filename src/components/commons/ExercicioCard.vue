@@ -11,25 +11,16 @@
               {{ props.nome }}
             </div>
           </q-card-section>
-          <q-card-section class="desktop-only">
+          <q-card-section>
             <div class=" responsive-text">
               {{ truncateDescription(props.descricao) }}
             </div>
           </q-card-section>
         </div>
       </div>
-      <q-dialog v-model="showDialog">
-        <q-card>
-          <q-card-section>
-            {{ props.descricao }}
-          </q-card-section>
-        </q-card>
-      </q-dialog>
+
       <q-card-actions vertical
         class="justify-around bg-grey-2 actions col-xs-3 col-md-2 col-lg-2 col-xl-2 col-sm-2 col-xl-1">
-        <q-btn class="mobile-only" flat unelevated dense color="blue-9" @click="showDialog = true">
-          <q-icon name="info" />
-        </q-btn>
         <q-btn flat unelevated dense color="orange-9">
           <q-icon name="edit" />
         </q-btn>
@@ -60,7 +51,6 @@ const props = defineProps({
 });
 
 const windowWidth = ref(window.innerWidth);
-const showDialog = ref(false);
 const emit = defineEmits([
   "delete",
 
@@ -85,7 +75,7 @@ const truncateDescription = (description) => {
   if (windowWidth.value > 1200) {
     limit = 110;
   } else if (windowWidth.value > 800) {
-    limit = 150;
+    limit = 100;
   } else {
     limit = 50;
   }
@@ -121,6 +111,28 @@ const truncateDescription = (description) => {
   font-weight: 500;
 }
 
+@media (max-width: 1200px) {
+  .imagem {
+    width: 100%;
+    height: auto;
+  }
+
+  .responsive-text {
+    font-size: 0.7m;
+  }
+}
+
+@media (max-width: 900px) {
+  .imagem {
+    width: 100%;
+    height: auto;
+  }
+
+  .responsive-text {
+    font-size: 0.7em;
+  }
+}
+
 @media (max-width: 600px) {
   .imagem {
     width: 100%;
@@ -128,7 +140,7 @@ const truncateDescription = (description) => {
   }
 
   .responsive-text {
-    font-size: 0.8em;
+    font-size: 0.5em;
   }
 }
 </style>

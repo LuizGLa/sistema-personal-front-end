@@ -5,7 +5,7 @@
         <template v-for="(exercicio, index) in exercicios" :key="index">
           <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :exercicioId="exercicio.id"
             :img-link="exercicio.gifUrl" :nome="exercicio.nome" :descricao="exercicio.descricao"
-            @delete="deleteExercicio(exercicio.id)" />
+            @delete="deleteExercicio(exercicio.id, exercicio.nome)" />
         </template>
       </div>
     </cti-card>
@@ -73,22 +73,23 @@ onMounted(async () => {
 
 
 
-const deleteExercicio = async (exercicioId) => {
+async function deleteExercicio(exercicioId, exercicioNome) {
   try {
     const { status } = await api.delete(`exercicios/${exercicioId}`);
-    if (status == 200) {
-      exibiNotificacao(
-        "positive",
-        `${usuario.nome} removido(a) com sucesso!`,
-        "top",
-        3000,
-      );
-      await buscaDados(); // Atualiza os dados após a exclusão
-    }
+    const recarregar = () => location.reload()
+
+    exibiNotificacao(
+      "positive",
+      `${exercicioNome} removido(a) com sucesso!`,
+      "top",
+      3000,
+    );
+    setTimeout(recarregar, 1000)
   } catch (error) {
     exibiNotificacao("negative", error.response.data.message, "top", 3000);
   }
 }
+
 
 
 </script>
