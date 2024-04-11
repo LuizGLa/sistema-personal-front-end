@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-card class="col-lg-4 q-ma-lg col-md-4 col-sm-6 col-12 flat bordered card row">
+    <q-card class=" col-lg-4 q-ma-lg col-md-4 col-sm-6 col-12 flat bordered card row">
       <div class="col-lg-3 col-sm-3 col-xs-4">
         <img class="imagem" :src="props.imgLink">
       </div>
@@ -57,10 +57,6 @@ const emit = defineEmits([
 
 ]);
 
-
-const handleDelete = () => {
-  emit('delete');
-};
 const confirmDelete = () => {
   emit('confirmDelete');
 };
