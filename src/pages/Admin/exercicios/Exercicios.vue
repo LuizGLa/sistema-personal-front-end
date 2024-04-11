@@ -4,8 +4,8 @@
       <div class="row">
         <template v-for="(exercicio, index) in exercicios" :key="index">
           <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :exercicioId="exercicio.id"
-            :img-link="exercicio.gifUrl" :nome="exercicio.nome" :descricao="exercicio.descricao"
-            @delete="deleteExercicio(exercicio.id, exercicio.nome)" />
+            :img-link="exercicio.gifUrl" :nome="exercicio.nome" :descricao="exercicio.descricao" @delete="deleteExercicio(exercicio.id, exercicio.nome)
+          " @confirmDelete="showDeleteConfirmation(exercicio.id, exercicio.nome)" />
         </template>
       </div>
     </cti-card>
@@ -44,15 +44,19 @@ const pagination = ref({
 const router = useRouter();
 const exercicios = ref([])
 
+const showDeleteConfirmation = (exercicioId, exercicioNome) => {
+  const mensagem = `Tem certeza que deseja excluir o exercício "${exercicioNome}"?`;
+  const botao = 'Excluir';
+  const acao = () => deleteExercicio(exercicioId, exercicioNome);
+  exibeMensagem({ mensagem, botao, acao });
+};
+
 async function buscaDados() {
   $q.loading.show({
     message: 'Buscando informações no servidor...',
   });
-
   const pagina = pagination.value.page;
-
   const url = `exercicios/?pagina=${pagina}&itensPorPagina=10&busca=${filter.value}`;
-
   try {
     const { data } = await api.get(url);
     exercicios.value = data.data;
@@ -75,18 +79,23 @@ onMounted(async () => {
 
 async function deleteExercicio(exercicioId, exercicioNome) {
   try {
-    const { status } = await api.delete(`exercicios/${exercicioId}`);
+    await api.delete(`exercicios/${exercicioId}`);
     const recarregar = () => location.reload()
 
-    exibiNotificacao(
-      "positive",
-      `${exercicioNome} removido(a) com sucesso!`,
-      "top",
-      3000,
-    );
+    $q.notify({
+      type: 'positive',
+      message: `${exercicioNome} removido(a) com sucesso!`,
+      position: 'top',
+      timeout: 2000,
+    })
     setTimeout(recarregar, 1000)
   } catch (error) {
-    exibiNotificacao("negative", error.response.data.message, "top", 3000);
+    $q.notify({
+      type: 'negative',
+      message: `Erro ao remover ${exercicioNome}!`,
+      position: 'top',
+      timeout: 2000,
+    })
   }
 }
 
