@@ -2,7 +2,7 @@
   "name": "sistema-personal",
   "version": "1.0.0",
   "description": "WebApplication de modelo",
-  "productName": "Modelo Front-end ",
+  "productName": "Custom Gym",
   "author": "Luiz Gustavo <luizgustavolima200@gmail.com>",
   "private": true,
   "scripts": {

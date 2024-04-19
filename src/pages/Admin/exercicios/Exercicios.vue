@@ -2,10 +2,16 @@
   <q-page>
     <cti-card icone="people" titulo="Exercícios">
       <div class="row">
+        <div class="col-12">
+          <q-btn class="q-ml-lg" style="color: aliceblue; background-color: #003C43" icon="add_circle"
+            to="rota_adicionar">
+            <span class="q-ml-xs" v-if="$q.screen.width >= 750">Adiconar exercício</span>
+          </q-btn>
+        </div>
         <template v-for="(exercicio, index) in exercicios" :key="index">
           <exercicio-card class="col-lg-4 col-md-4 col-sm-6 col-12" :exercicioId="exercicio.id"
             :img-link="exercicio.gifUrl" :nome="exercicio.nome" :descricao="exercicio.descricao" @delete="deleteExercicio(exercicio.id, exercicio.nome)
-          " @confirmDelete="showDeleteConfirmation(exercicio.id, exercicio.nome)" />
+              " @confirmDelete="showDeleteConfirmation(exercicio.id, exercicio.nome)" />
         </template>
       </div>
     </cti-card>

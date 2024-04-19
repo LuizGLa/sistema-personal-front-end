@@ -9,17 +9,15 @@
     </q-item-section>
   </q-item>
 
-  <q-expansion-item v-else
-    :icon="icon"
-    :label="title"
-  >
+  <q-expansion-item v-else :icon="icon" :label="title">
     <q-list class="q-pl-lg">
-      <q-item v-for="linkSubmenu in linksListSubMenu" :key="linkSubmenu.link" clickable tag="router-link" :to="linkSubmenu.link" exact>
+      <q-item v-for="linkSubmenu in linksListSubMenu" :key="linkSubmenu.link" clickable tag="router-link"
+        :to="linkSubmenu.link" exact>
         <q-item-section avatar>
           <q-icon :name="linkSubmenu.icon" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{linkSubmenu.title}}</q-item-label>
+          <q-item-label class="label">{{ linkSubmenu.title }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
@@ -59,3 +57,4 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped></style>

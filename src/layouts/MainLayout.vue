@@ -3,14 +3,7 @@
     <q-header>
       <q-toolbar class="row" style="background-color: #003C43;">
         <div class="col-lg-4 col-sm-4 col-md-2">
-          <q-btn
-            flat
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            @click="leftDrawerOpen = !leftDrawerOpen"
-          />
+          <q-btn flat dense round icon="menu" aria-label="Menu" @click="leftDrawerOpen = !leftDrawerOpen" />
         </div>
 
         <div class="xs-hide col-sm-4 col-md-8 col-lg-4">
@@ -19,30 +12,13 @@
           </q-toolbar-title>
         </div>
         <div class="col-6 col-sm-4 col-md-2 col-lg-4" style="text-align: right">
-          <q-btn
-            color="white"
-            class="text-cyan-9"
-            :label="acesso"
-            icon="account_circle"
-          >
+          <q-btn color="white" class="text-cyan-9" :label="acesso" icon="account_circle">
             <q-menu fit anchor="bottom left" self="top left" :offset="[2, 2]">
-              <q-item
-                clickable
-                tag="a"
-                @click="perfil"
-                exact
-                class="row items-center"
-              >
+              <q-item clickable tag="a" @click="perfil" exact class="row items-center">
                 <q-item-section>Perfil</q-item-section>
                 <q-icon name="account_circle" size="sm" />
               </q-item>
-              <q-item
-                clickable
-                tag="a"
-                @click="sair"
-                exact
-                class="row items-center"
-              >
+              <q-item clickable tag="a" @click="sair" exact class="row items-center">
                 <q-item-section>Sair</q-item-section>
                 <q-icon name="logout" size="sm" />
               </q-item>
@@ -54,25 +30,32 @@
 
     <q-page-container>
       <div>
-        <q-drawer
-          behavior="desktop"
-          :width="190"
-          v-model="leftDrawerOpen"
-          :overlay="!modoExibicao"
-          show-if-above
-          class="q-py-md bg-grey-2"
-          bordered
-        >
+        <q-drawer dark style=" background: linear-gradient(to bottom, #06847d, #094171);
+" behavior="desktop" :width="250" v-model="leftDrawerOpen" :overlay="!modoExibicao" show-if-above
+          class="q-py-md drawer" bordered>
+          <div @click="perfil" class="flex cursor-pointer q-gutter-md q-px-md q-py-sm">
+            <div>
+              <q-avatar style="border: 2px solid white;">
+                <img src="../assets/images/avatar.png" alt="Logo" class="logo" />
+              </q-avatar>
+            </div>
+            <div>
+              <div>
+                <label class="title">{{ nome }}</label>
+              </div>
+              <div>
+                <label class="nivel">{{ nivel }}</label>
+              </div>
+            </div>
+          </div>
+          <q-separator color="white" class="q-my-md" />
           <q-list>
-            <EssentialLink
-              v-for="link in links"
-              :key="link.title"
-              v-bind="link"
-            />
+            <EssentialLink :class="{ 'selected-link': isLinkActive(link.link) }" v-for="link in links" :key="link.title"
+              v-bind="link" />
           </q-list>
         </q-drawer>
       </div>
-      <router-view class="q-pa-md" />
+      <router-view />
     </q-page-container>
 
     <q-footer style="background-color: #003C43;" elevated class=" q-pa-xs text-white text-center">
@@ -87,6 +70,8 @@ import EssentialLink from 'components/commons/EssentialLink.vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
+import { useRoute } from 'vue-router';
+import { api } from 'src/boot/axios';
 
 export default {
   components: {
@@ -99,9 +84,18 @@ export default {
     const modoExibicao = $q.platform.is.desktop;
     const acesso = ref('');
     const userName = ref('');
+    const usuario = ref();
+    const nome = ref("");
+    const nivel = ref("");
+    const usuario_id = window.sessionStorage.getItem("user_id");
+    const id = usuario_id.slice(1, usuario_id.length - 1);
 
     const links = ref([]);
+    const route = useRoute();
 
+    function isLinkActive(link) {
+      return route.path === link;
+    }
     onMounted(async () => {
       configurarMenu();
     });
@@ -165,6 +159,17 @@ export default {
       router.push('/perfil');
     }
 
+    async function buscaUsuario() {
+      const response = await api.get(`usuarios/${id}`);
+      usuario.value = response.data;
+      nome.value = usuario.value.nome;
+      nivel.value = usuario.value.nivel;
+    }
+
+    onMounted(async () => {
+      buscaUsuario();
+    });
+
     async function sair() {
       router.push('/login');
       await store.dispatch('auth/signOut');
@@ -174,10 +179,13 @@ export default {
 
     return {
       modoExibicao,
+      isLinkActive,
       links,
       leftDrawerOpen,
       acesso,
       perfil,
+      nome,
+      nivel,
       userName,
       sair,
     };
@@ -186,6 +194,16 @@ export default {
 </script>
 <style scoped>
 .selected-link {
-  background-color: #5cb85c; /* Altere para a cor desejada */
+  color: #9cf8e1;
+  /* Altere para a cor desejada */
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.nivel {
+  font-size: 12px;
 }
 </style>
